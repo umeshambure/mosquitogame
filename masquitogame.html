@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Game</title>
+    <style>
+        .playground {
+            position: relative;
+            background-color: yellow;
+            height: 2000px;
+            width: 1000px; 
+            float:left;
+        }
+
+        .mosquito {
+            position: relative;
+            height: 50px;
+        }
+        
+        
+    </style>
+</head>
+
+<body>
+    <div class="playground">
+        <img class="mosquito" id="mosquito" onclick="hitMosquito()"
+            src="https://www.pngplay.com/wp-content/uploads/7/Mosquito-Transparent-PNG.png">
+    </div>
+    <div class="controls">
+        <h2 id="gameStatus"></h2>
+        <h3>
+            <span>Total</span>
+            <span id="totalHit"></span>
+        </h3>
+        <button onclick="startGame()">Start Game</button>
+        
+    </div>
+    <script>
+        let hitCount = 0;
+        let isGameStart = false
+        function startGame() {
+            hitCount=0;
+            document.getElementById('gameStatus').innerText="Game Started"
+            isGameStart = true;
+            let mosquito = document.getElementById('mosquito');
+
+            let time = setInterval(() => {
+                let i = Math.floor(Math.random() * 500) + 1;
+                let j = Math.floor(Math.random() * 500) + 1;
+                mosquito.style.left = i + "px"
+                mosquito.style.top = j + "px"
+            }, 2000)
+            setTimeout(() => {
+                clearTimeout(time);
+                isGameStart = false;
+                document.getElementById('gameStatus').innerText="Game over"
+            }, 30000)
+        }
+        function hitMosquito() {
+            if (isGameStart) {
+                hitCount++;
+                document.getElementById('totalHit').innerText = hitCount;
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
